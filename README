@@ -1,1 +1,38 @@
 Testing how LEAP users would set up a self-running PGF recipe repo.
+
+Instructions to run this on dataflow
+
+set up credentials (there must be a sleeker way?)
+```
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/juliusbusecke/Downloads/keys/leap-pangeo-dataflow_service_account.json
+```
+
+then run with pangeo forge runner (mostly relying on the `config.json`)
+```
+pangeo-forge-runner bake --repo "https://github.com/jbusecke/test_leap_dataset.git" --ref "master" -f config.json
+```
+
+> Needs to run on py3.9!!!
+
+There is some issue with the jobname, 
+```
+Target Storage is FSSpecTarget(GCSFileSystem(, root_path="gs://leap-persistent/jbusecke/data/library/test/")
+Input Cache Storage is CacheFSSpecTarget(GCSFileSystem(, root_path="gs://leap-scratch/jbusecke/data/library/test/input-cache/")
+Metadata Cache Storage is MetadataTarget(AbstractFileSystem(, root_path="")
+Picked Git content provider.
+Cloning into '/var/folders/_1/1k9jtjl51z333f21s7yht0340000gn/T/tmpvt4zd9cq'...
+HEAD is now at 0935d10 First DF Test
+Parsing recipes...Traceback (most recent call last):
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/bin/pangeo-forge-runner", line 8, in <module>
+    sys.exit(main())
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/cli.py", line 28, in main
+    app.start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/cli.py", line 23, in start
+    super().start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/traitlets/config/application.py", line 473, in start
+    return self.subapp.start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/commands/bake.py", line 142, in start
+    job_name = f"{name}-{recipe.sha256().hex()}-{int(datetime.now().timestamp())}"
+AttributeError: '_ChainedPTransform' object has no attribute 'sha256'
+```
+but that might be a new feature.

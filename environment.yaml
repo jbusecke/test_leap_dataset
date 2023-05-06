@@ -1,8 +1,9 @@
 name: test_leap_dataset
 dependencies:
-  - python=3.10
+  - python=3.9
   - ipykernel
   - fsspec
+  - gcsfs
   - pandas
   - xarray
   - pip
