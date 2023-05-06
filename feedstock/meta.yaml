@@ -1,0 +1,18 @@
+title: "MetaFlux"
+description: "Meta-learning global carbon fluxes from sparse spatiotemporal observations" 
+recipes:
+  - id: meta-flux
+    object: "recipe:transforms"
+provenance:
+  providers: 
+    - name: "ESGF" 
+      description: "Earth System Grid Federation"
+      roles:
+        - producer
+        - licensor
+      url: https://esgf-node.llnl.gov/projects/cmip6/
+  license: "CC-BY-4.0" #TODO...
+maintainers:
+  - name: "Julius Busecke"
+    orcid: "0000-0001-8571-865X"
+    github: jbusecke

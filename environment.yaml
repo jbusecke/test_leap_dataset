@@ -1,0 +1,12 @@
+name: test_leap_dataset
+dependencies:
+  - python=3.10
+  - ipykernel
+  - fsspec
+  - pandas
+  - xarray
+  - pip
+  - pip:
+    - apache-beam[gcp,interactive,dataframe]
+    - git+https://github.com/pangeo-forge/pangeo-forge-recipes.git@beam-refactor
+    - pangeo-forge-runner
