@@ -20,6 +20,6 @@ transforms = (
     | StoreToZarr(
         store_name="test_leap_dataset.zarr",
         combine_dims=pattern.combine_dim_keys,
-        target_root="gs://leap-persistent/jbusecke/data/library/test/",
+        target_root="gs://leap-persistent/jbusecke/data/library/test",
     )
 )
