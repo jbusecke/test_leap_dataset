@@ -18,6 +18,7 @@ transforms = (
     | OpenURLWithFSSpec(cache='temp/cache')
     | OpenWithXarray()
     | StoreToZarr(
+        store_name="test_leap_dataset.zarr",
         combine_dims=pattern.combine_dim_keys,
     )
 )
