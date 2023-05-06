@@ -15,7 +15,7 @@ input_urls = [
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
-    | OpenURLWithFSSpec(cache='temp/cache')
+    | OpenURLWithFSSpec()
     | OpenWithXarray()
     | StoreToZarr(
         store_name="test_leap_dataset.zarr",
