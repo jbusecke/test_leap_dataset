@@ -1,6 +1,9 @@
 Testing how LEAP users would set up a self-running PGF recipe repo.
 
-Instructions to run this on dataflow
+## The dataset
+https://zenodo.org/record/7761881#.ZFWafi-B30o
+
+## Instructions to run this on dataflow
 
 set up credentials (there must be a sleeker way?)
 ```
@@ -14,6 +17,7 @@ pangeo-forge-runner bake --repo "https://github.com/jbusecke/test_leap_dataset.g
 
 > Needs to run on py3.9!!!
 
+##
 There is some issue with the jobname, 
 ```
 Target Storage is FSSpecTarget(GCSFileSystem(, root_path="gs://leap-persistent/jbusecke/data/library/test/")
@@ -35,4 +39,58 @@ Parsing recipes...Traceback (most recent call last):
     job_name = f"{name}-{recipe.sha256().hex()}-{int(datetime.now().timestamp())}"
 AttributeError: '_ChainedPTransform' object has no attribute 'sha256'
 ```
-but that might be a new feature.
+but that might be a new feature. I have now just added `--Bake.job_name=firsttest`
+
+But there are more errors...
+Ok i dont get this. Need to chat to Charles...
+
+```
+request non-retriable exception: Required parameter: project, 400
+Traceback (most recent call last):
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/retry.py", line 114, in retry_request
+    return await func(*args, **kwargs)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/core.py", line 411, in _request
+    validate_response(status, contents, path, args)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/retry.py", line 101, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Required parameter: project, 400
+Traceback (most recent call last):
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/bin/pangeo-forge-runner", line 8, in <module>
+    sys.exit(main())
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/cli.py", line 28, in main
+    app.start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/cli.py", line 23, in start
+    super().start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/traitlets/config/application.py", line 473, in start
+    return self.subapp.start()
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/commands/bake.py", line 185, in start
+    "target_root": target_storage.get_forge_target(
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_runner/storage.py", line 54, in get_forge_target
+    return self.pangeo_forge_target_class(
+  File "<string>", line 5, in __init__
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/pangeo_forge_recipes/storage.py", line 149, in __post_init__
+    if not self.fs.isdir(self.root_path):
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/fsspec/asyn.py", line 115, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/fsspec/asyn.py", line 100, in sync
+    raise return_result
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/fsspec/asyn.py", line 55, in _runner
+    result[0] = await coro
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/core.py", line 1182, in _isdir
+    return (await self._info(path))["type"] == "directory"
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/core.py", line 757, in _info
+    out = await self._call("GET", f"b/{path}", json_out=True)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/core.py", line 418, in _call
+    status, headers, info, contents = await self._request(
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/decorator.py", line 221, in fun
+    return await caller(func, *(extras + args), **kw)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/retry.py", line 149, in retry_request
+    raise e
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/retry.py", line 114, in retry_request
+    return await func(*args, **kwargs)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/core.py", line 411, in _request
+    validate_response(status, contents, path, args)
+  File "/Users/juliusbusecke/miniconda/envs/test_leap_dataset/lib/python3.9/site-packages/gcsfs/retry.py", line 101, in validate_response
+    raise HttpError(error)
+gcsfs.retry.HttpError: Required parameter: project, 400
+```
