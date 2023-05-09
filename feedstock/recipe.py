@@ -9,8 +9,8 @@ from pangeo_forge_recipes.transforms import (
 transform_dict = {}
 
 # for testing
-# years = range(2001, 2003)
-years = range(2001, 2021)
+years = range(2001, 2006)
+# years = range(2001, 2022)
 
 #trying to avoid time out errors
 # see https://stackoverflow.com/a/73746020
