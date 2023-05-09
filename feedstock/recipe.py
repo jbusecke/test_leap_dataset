@@ -16,6 +16,7 @@ import typing as t
 import numpy as np
 import time
 from dataclasses import dataclass
+import inspect
 
 from typing import Optional, Union
 
@@ -158,7 +159,7 @@ input_urls = [
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
-    | OpenURLWithFSSpec()#open_kwargs=open_kwargs
+    | OpenURLWithFSSpec(global_rate_limit_qps=1, latency_per_request=0.5,max_concurrent_requests=1)#open_kwargs=open_kwargs
     | OpenWithXarray()
     | StoreToZarr(
         store_name="METAFLUX_GPP_RECO_monthly.zarr",
