@@ -14,8 +14,8 @@ years = range(2001, 2003)
 
 #trying to avoid time out errors
 # see https://stackoverflow.com/a/73746020
-from aiohttp import ClientTimeout
-open_kwargs = {"client_kwargs":{"timeout": ClientTimeout(total=5000, connect=1000)}}
+# from aiohttp import ClientTimeout
+# open_kwargs = {"client_kwargs":{"timeout": ClientTimeout(total=5000, connect=1000)}}
 
 ## Monthly version
 
@@ -26,7 +26,7 @@ input_urls = [
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
-    | OpenURLWithFSSpec(open_kwargs=open_kwargs)
+    | OpenURLWithFSSpec()#open_kwargs=open_kwargs
     | OpenWithXarray()
     | StoreToZarr(
         store_name="METAFLUX_GPP_RECO_monthly.zarr",
@@ -41,7 +41,7 @@ input_urls = [f"https://zenodo.org/record/7761881/files/METAFLUX_GPP_RECO_daily_
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
-    | OpenURLWithFSSpec(open_kwargs=open_kwargs)
+    | OpenURLWithFSSpec()#open_kwargs=open_kwargs
     | OpenWithXarray()
     | StoreToZarr(
         store_name="METAFLUX_GPP_RECO_daily.zarr",
