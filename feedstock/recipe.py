@@ -6,7 +6,7 @@ from pangeo_forge_recipes.patterns import pattern_from_file_sequence
 from pangeo_forge_recipes.transforms import (
     OpenURLWithFSSpec, OpenWithXarray, StoreToZarr
     )
-transforms_dict = {}
+transform_dict = {}
 
 # for testing
 years = range(2001, 2003)
@@ -33,7 +33,7 @@ transforms = (
         combine_dims=pattern.combine_dim_keys,
     )
 )
-transforms_dict['METAFLUX_GPP_RECO_monthly'] = transforms
+transform_dict['METAFLUX_GPP_RECO_monthly'] = transforms
 
 
 ## daily version
@@ -48,5 +48,5 @@ transforms = (
         combine_dims=pattern.combine_dim_keys,
     )
 )
-transforms_dict['METAFLUX_GPP_RECO_daily'] = transforms
+transform_dict['METAFLUX_GPP_RECO_daily'] = transforms
 

@@ -1,8 +1,7 @@
 title: "MetaFlux"
 description: "Meta-learning global carbon fluxes from sparse spatiotemporal observations" 
 recipes:
-  - id: meta-flux
-    object: "recipe:transforms"
+  dict_object: "recipe:transform_dict"
 provenance:
   providers: 
     - name: "ESGF" 
