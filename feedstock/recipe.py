@@ -17,7 +17,7 @@ import numpy as np
 import time
 from dataclasses import dataclass
 
-from typing import Optional
+from typing import Optional, Union
 
 from pangeo_forge_recipes.transforms import _add_keys, CacheFSSpecTarget, open_url
 
@@ -118,7 +118,7 @@ class OpenURLWithFSSpec(RateLimit):
     :param open_kwargs: Extra arguments passed to fsspec.open.
     """
 
-    cache: Optional[str | CacheFSSpecTarget] = None
+    cache: Optional[Union[str, CacheFSSpecTarget]] = None
     secrets: Optional[dict] = None
     open_kwargs: Optional[dict] = None
 
