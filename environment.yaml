@@ -10,4 +10,5 @@ dependencies:
   - pip
   - pip:
     - git+https://github.com/pangeo-forge/pangeo-forge-recipes.git@beam-refactor
-    - pangeo-forge-runner
+    # manually install this one with --no-deps
+    - git+https://github.com/pangeo-forge/pangeo-forge-runner.git@arbitrary-injections
