@@ -14,7 +14,7 @@ then run with pangeo forge runner (mostly relying on the `config.json`)
 ```
 pangeo-forge-runner bake --repo "https://github.com/jbusecke/test_leap_dataset.git" --ref "master" -f config.json
 ```
-
+# Add --Bake.job_name=firsttest see comment below
 > Needs to run on py3.9!!!
 
 ##
