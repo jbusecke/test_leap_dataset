@@ -1,7 +1,4 @@
 
-### needs to be here otherwise the import fails
-"""Modified transforms from Pangeo Forge"""
-
 import apache_beam as beam
 from pangeo_forge_recipes.patterns import pattern_from_file_sequence
 from pangeo_forge_recipes.transforms import (
@@ -10,21 +7,15 @@ from pangeo_forge_recipes.transforms import (
     StoreToZarr
     )
 
+years = range(2001, 2022)
+months = range(1, 13)
+dataset_url = 'https://zenodo.org/record/7761881/files'
 transform_dict = {}
-
-# for testing
-years = range(2001, 2003)
-# years = range(2001, 2022)
-
-#trying to avoid time out errors
-# see https://stackoverflow.com/a/73746020
-# from aiohttp import ClientTimeout
-# open_kwargs = {"client_kwargs":{"timeout": ClientTimeout(total=5000, connect=1000)}}
-
 ## Monthly version
 
+
 input_urls = [
-    f'https://zenodo.org/record/7761881/files/METAFLUX_GPP_RECO_monthly_{year}.nc?download=1' for year in years
+    f'{dataset_url}/METAFLUX_GPP_RECO_monthly_{y}.nc' for y in years
 ]
 
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
@@ -39,9 +30,10 @@ transforms = (
 )
 transform_dict['METAFLUX_GPP_RECO_monthly'] = transforms
 
-
 ## daily version
-input_urls = [f"https://zenodo.org/record/7761881/files/METAFLUX_GPP_RECO_daily_{year}{month:02}.nc?download=1" for year in years for month in range(1,13) ]
+input_urls = [
+    f"{dataset_url}/METAFLUX_GPP_RECO_daily_{y}{m:02}.nc" for y in years for m in months
+]
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
