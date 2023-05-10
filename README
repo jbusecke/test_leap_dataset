@@ -3,6 +3,23 @@ Testing how LEAP users would set up a self-running PGF recipe repo.
 ## The dataset
 https://zenodo.org/record/7761881#.ZFWafi-B30o
 
+## Run this on the hub
+
+Create a dedicated environment with python 3.9 
+
+```shell
+mamba create "python=3.9" ipykernel pandas --name pangeo-forge-deployment -y
+conda activate pangeo-forge-deployment
+pip install apache-beam[interactive,dataframe]==2.42.0 git+https://github.com/pangeo-forge/pangeo-forge-runner.git 'gcsfs==2022.8.2'
+pip install -U git+https://github.com/pangeo-forge/pangeo-forge-recipes.git@beam-refactor
+```
+
+Then execute with panggeo-forge-runner
+```shell
+pangeo-forge-runner bake --repo "https://github.com/jbusecke/test_leap_dataset.git" --ref "master" -f config_hub.json --Bake.recipe_id=METAFLUX_GPP_RECO_daily
+```
+
+
 ## Instructions to run this on dataflow
 
 set up credentials (there must be a sleeker way?)

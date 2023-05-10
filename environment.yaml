@@ -6,9 +6,10 @@ dependencies:
   - gcsfs
   - pandas
   - xarray
-  - apache-beam-with-gcp=2.42.0
+  - gcsfs
+  # - apache-beam-with-gcp=2.42.0
   - pip
   - pip:
     - git+https://github.com/pangeo-forge/pangeo-forge-recipes.git@beam-refactor
-    # manually install this one with --no-deps
-    - git+https://github.com/pangeo-forge/pangeo-forge-runner.git@arbitrary-injections
+    - apache-beam[gcp]=2.42.0
+    - git+https://github.com/pangeo-forge/pangeo-forge-runner.git
