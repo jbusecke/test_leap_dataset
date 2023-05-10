@@ -8,20 +8,12 @@
     },
     "TargetStorage": {
         "fsspec_class": "gcsfs.GCSFileSystem",
-<<<<<<< HEAD
-        "root_path": "gs://leap-persistent/jbusecke/data/library/test"
-    },
-    "InputCacheStorage": {
-        "fsspec_class": "gcsfs.GCSFileSystem",
-        "root_path": "gs://leap-scratch/jbusecke/data/library/test/input-cache"
-=======
         "fsspec_kwargs": {"project": "leap-pangeo"},
-        "root_path": "gs://leap-persistent/jbusecke/data/library/test/runner_hub"
+        "root_path": "gs://leap-persistent/jbusecke/data/library/test/runner_hub/"
     },
     "InputCacheStorage": {
         "fsspec_class": "gcsfs.GCSFileSystem",
         "fsspec_kwargs": {"project": "leap-pangeo"},
-        "root_path": "gs://leap-scratch/jbusecke/data/library/test/runner_hub/input-cache"
->>>>>>> 3e5d07c5c0147b5747ae275207caa2c488187084
+        "root_path": "gs://leap-scratch/jbusecke/data/library/test/runner_hub/input-cache/"
     }
 }

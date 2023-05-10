@@ -13,7 +13,7 @@ from pangeo_forge_recipes.transforms import (
 transform_dict = {}
 
 # for testing
-years = range(2001, 2006)
+years = range(2001, 2003)
 # years = range(2001, 2022)
 
 #trying to avoid time out errors
@@ -41,7 +41,7 @@ transform_dict['METAFLUX_GPP_RECO_monthly'] = transforms
 
 
 ## daily version
-input_urls = [f"https://zenodo.org/record/7761881/files/METAFLUX_GPP_RECO_daily_{year}{month:02}.nc?download=1" for year in years for month in range(1,12) ]
+input_urls = [f"https://zenodo.org/record/7761881/files/METAFLUX_GPP_RECO_daily_{year}{month:02}.nc?download=1" for year in years for month in range(1,13) ]
 pattern = pattern_from_file_sequence(input_urls, concat_dim='time')
 transforms = (
     beam.Create(pattern.items())
